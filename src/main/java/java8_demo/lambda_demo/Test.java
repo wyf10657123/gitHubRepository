@@ -49,6 +49,7 @@ public class Test {
         //eagerEvaluator(evaluate(1),evaluate(2));
         lazyEvaluator(()->evaluate(1),()->evaluate(2));//懒操作
         //test revert
+        //test revert123
     }
 
     public static Map<Long,UserInfo> testCollectToMap(List<UserInfo> list){
