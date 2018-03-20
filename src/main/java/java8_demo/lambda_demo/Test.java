@@ -51,7 +51,6 @@ public class Test {
         //test revert
         //test revert123
         //test reset
-        //test
     }
 
     public static Map<Long,UserInfo> testCollectToMap(List<UserInfo> list){
