@@ -4,7 +4,16 @@ public class UserInfo {
 
     private Long id;
     private String name;
+    private int age;
     private boolean success;
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
 
     public boolean isSuccess() {
         return success;

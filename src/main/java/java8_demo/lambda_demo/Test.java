@@ -3,12 +3,12 @@ package java8_demo.lambda_demo;
 import domain.UserInfo;
 import java8_demo.lambda_demo.Print;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -34,27 +34,26 @@ public class Test {
         userInfo.setName("c");
         userInfo.setSuccess(false);
         list.add(userInfo);
-        List<UserInfo> userInfoList=null;
-        //List<String> stringList=testMap(list);//map:把原来的流（集合）的每个元素按照lambda表达式映射生成新的流
-        //testForEach(list);
-       /* Map<Long,UserInfo> map=testCollectToMap(list);
-        System.out.println(list);
-        String[] strArr=new String[]{"a","123","12"};
-        List list1=new ArrayList();
-        Arrays.sort(strArr,(s1,s2)->Integer.compare(s1.length(),s2.length()));
-        Arrays.stream(strArr).forEach(e->{
-            System.out.println(e);
-            list1.add(e);
-        });*/
-        //eagerEvaluator(evaluate(1),evaluate(2));
-        lazyEvaluator(()->evaluate(1),()->evaluate(2));//懒操作
-        //test revert
-        //test revert123
-        //test reset
-        //test
+        userInfo=new UserInfo();
+        userInfo.setId(4L);
+        userInfo.setName("d");
+        userInfo.setSuccess(false);
+        list.add(userInfo);
+        userInfo=new UserInfo();
+        userInfo.setId(4L);
+        userInfo.setName("e");
+        userInfo.setSuccess(false);
+        list.add(userInfo);
+        List<UserInfo> listpage=list.stream().skip(4).limit(2).collect(toList());
+        System.out.println(listpage);
+    }
+
+    public static void testGroup(List<UserInfo> list){
+        //list.stream().
     }
 
     public static Map<Long,UserInfo> testCollectToMap(List<UserInfo> list){
+        //通过collect()方法将Stream转换成容器的方法
         Map<Long,UserInfo> map=list.stream().collect(Collectors.toMap(UserInfo::getId,e->e));
         return map;
     }
@@ -64,6 +63,8 @@ public class Test {
     }
 
     public static List<String> testMap(List<UserInfo> list){
+        //map:把原来的流（集合）的每个元素按照lambda表达式映射生成新的流
+        //通过collect()方法将Stream转换成容器的方法
         return list.stream().map(UserInfo::getName).collect(toList());
     }
 
@@ -72,7 +73,9 @@ public class Test {
     }
 
     public static List<UserInfo> testFilter(List<UserInfo> list){
-        return list.stream().filter(e->e.isSuccess()).collect(toList());
+        return list.stream().filter((e1)->
+            e1.getAge()>1
+        ).collect(toList());
     }
 
     public static void printString(String str,Print<String> print){
